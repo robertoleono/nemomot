@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>NEMOMOT — Books That Change the Way You Think</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#0e0e0e;--ink-soft:#3a3a3a;--ink-muted:#777;
+  --surface:#f7f5f2;--surface-2:#eeebe6;--surface-3:#e4e0d9;
+  --gold:#b8924a;--gold-light:#d4aa6a;
+  --rule:#d4cfc8;--max:1080px;--col:660px;
+  --serif:Georgia,'Times New Roman',serif;
+  --sans:'Helvetica Neue',Arial,sans-serif;
+}
+body{background:var(--surface);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+
+/* ── NAV ── */
+nav{display:flex;justify-content:space-between;align-items:center;padding:1.1rem 2.5rem;border-bottom:0.5px solid var(--rule);background:var(--surface);position:sticky;top:0;z-index:100}
+.nav-brand{font-family:var(--serif);font-size:1.2rem;letter-spacing:0.08em;color:var(--ink)}
+.nav-links{display:flex;gap:2rem;align-items:center}
+.nav-links a{font-size:13px;color:var(--ink-muted);letter-spacing:0.05em;transition:color .2s}
+.nav-links a:hover{color:var(--ink)}
+.nav-cta{font-size:12px;letter-spacing:0.08em;border:0.5px solid var(--ink);padding:7px 18px;cursor:pointer;background:transparent;color:var(--ink);font-family:var(--sans);transition:background .2s,color .2s}
+.nav-cta:hover{background:var(--ink);color:var(--surface)}
+
+/* ── HERO ── */
+.hero{background:var(--ink);padding:7rem 2.5rem 5rem;position:relative;overflow:hidden}
+.hero::before{content:'NEMOMOT';position:absolute;bottom:-1rem;right:-1rem;font-family:var(--serif);font-size:18rem;color:#ffffff06;line-height:1;pointer-events:none;white-space:nowrap}
+.hero-inner{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:end}
+.hero-left{}
+.hero-eyebrow{font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem;display:block}
+.hero h1{font-family:var(--serif);font-size:clamp(2.5rem,5vw,4rem);font-weight:normal;line-height:1.1;color:#f7f5f2;margin-bottom:1.5rem}
+.hero h1 em{font-style:italic;color:var(--gold-light)}
+.hero-desc{font-size:15px;color:#888;line-height:1.75;max-width:420px}
+.hero-right{display:flex;flex-direction:column;gap:1rem;align-items:flex-start}
+.hero-stat{border-left:2px solid var(--gold);padding-left:1.1rem}
+.hero-stat-num{font-family:var(--serif);font-size:2.2rem;color:#f7f5f2;line-height:1}
+.hero-stat-label{font-size:12px;color:#666;letter-spacing:0.04em;margin-top:2px}
+.hero-divider{width:100%;height:0.5px;background:#222}
+
+/* ── MANIFESTO ── */
+.manifesto{max-width:var(--col);margin:0 auto;padding:5rem 2.5rem;text-align:center}
+.manifesto blockquote{font-family:var(--serif);font-size:clamp(1.3rem,2.5vw,1.7rem);font-weight:normal;font-style:italic;line-height:1.5;color:var(--ink);margin-bottom:1rem}
+.manifesto cite{font-size:13px;color:var(--ink-muted);letter-spacing:0.06em;font-style:normal}
+
+/* ── SECTION LABEL ── */
+.section-label{font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--ink-muted);display:block;margin-bottom:1.75rem}
+
+/* ── HR ── */
+hr{border:none;border-top:0.5px solid var(--rule);max-width:var(--max);margin:0 auto}
+
+/* ── BOOKS GRID ── */
+.books-section{max-width:var(--max);margin:0 auto;padding:4rem 2.5rem}
+.books-header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:2.5rem}
+.books-header h2{font-family:var(--serif);font-size:1.6rem;font-weight:normal}
+.books-header a{font-size:13px;color:var(--ink-muted);letter-spacing:0.05em;border-bottom:0.5px solid var(--rule)}
+
+.books-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem}
+
+/* Featured book */
+.book-card{display:flex;flex-direction:column;cursor:pointer;transition:opacity .2s}
+.book-card:hover{opacity:.85}
+.book-cover{aspect-ratio:2/3;display:flex;flex-direction:column;justify-content:space-between;padding:1rem;position:relative;overflow:hidden}
+.book-cover-bar{position:absolute;top:0;left:0;right:0;height:3px}
+.book-cover-top{display:flex;flex-direction:column;gap:4px}
+.book-cover-imprint{font-size:8px;letter-spacing:0.15em;text-transform:uppercase}
+.book-cover-title{font-family:var(--serif);font-style:italic;line-height:1.2}
+.book-cover-bottom{}
+.book-cover-author{font-size:9px;letter-spacing:0.06em;margin-top:4px}
+
+/* Featured */
+.book-card.featured .book-cover{background:var(--ink)}
+.book-card.featured .book-cover-bar{background:var(--gold)}
+.book-card.featured .book-cover-imprint{color:#555}
+.book-card.featured .book-cover-title{font-size:18px;color:#f7f5f2}
+.book-card.featured .book-cover-author{color:#888}
+.book-card.featured .book-badge{background:var(--gold);color:#0e0e0e;font-size:10px;letter-spacing:0.08em;padding:3px 10px;display:inline-block;margin-bottom:.6rem;font-weight:500}
+
+/* Coming soon */
+.book-card.soon .book-cover{background:var(--surface-2);border:0.5px solid var(--rule)}
+.book-card.soon .book-cover-bar{background:var(--surface-3)}
+.book-card.soon .book-cover-imprint{color:var(--ink-muted)}
+.book-card.soon .book-cover-title{font-size:15px;color:var(--ink-soft)}
+.book-card.soon .book-cover-author{color:var(--ink-muted)}
+.book-card.soon .book-cover-eyebrow{font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-muted);margin-bottom:.4rem}
+
+/* Placeholder */
+.book-card.placeholder .book-cover{background:var(--surface-3);border:0.5px dashed var(--rule);align-items:center;justify-content:center}
+.book-card.placeholder .book-cover-inner{text-align:center}
+.book-card.placeholder .ph-label{font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--rule)}
+.book-card.placeholder .ph-year{font-family:var(--serif);font-size:1.4rem;color:var(--surface-3);margin-top:.25rem}
+
+.book-meta{margin-top:.85rem}
+.book-title{font-family:var(--serif);font-size:15px;font-weight:normal;color:var(--ink);line-height:1.3}
+.book-author-name{font-size:12px;color:var(--ink-muted);margin-top:2px}
+.book-tag{display:inline-block;font-size:10px;letter-spacing:0.08em;border:0.5px solid var(--rule);padding:2px 8px;color:var(--ink-muted);margin-top:.4rem}
+.book-cta{display:inline-block;font-size:12px;color:var(--gold);margin-top:.5rem;letter-spacing:0.04em;border-bottom:0.5px solid var(--gold)}
+
+/* ── ABOUT ── */
+.about-section{background:var(--ink);padding:5rem 2.5rem}
+.about-inner{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start}
+.about-left h2{font-family:var(--serif);font-size:clamp(1.6rem,3vw,2.2rem);font-weight:normal;color:#f7f5f2;line-height:1.25;margin-bottom:1.25rem}
+.about-left p{font-size:15px;color:#888;line-height:1.8;margin-bottom:1rem}
+.about-right{}
+.about-label{font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:1.5rem}
+.pillar{padding:1.25rem 0;border-bottom:0.5px solid #222}
+.pillar:first-of-type{border-top:0.5px solid #222}
+.pillar-num{font-family:var(--serif);font-size:11px;color:#444;margin-bottom:.3rem}
+.pillar-title{font-size:15px;font-weight:500;color:#ccc;margin-bottom:.25rem}
+.pillar-desc{font-size:13px;color:#666;line-height:1.6}
+
+/* ── COMMUNITY ── */
+.community-section{max-width:var(--max);margin:0 auto;padding:5rem 2.5rem;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+.community-left h2{font-family:var(--serif);font-size:clamp(1.5rem,3vw,2rem);font-weight:normal;line-height:1.25;margin-bottom:1rem}
+.community-left p{font-size:15px;color:var(--ink-soft);line-height:1.75;margin-bottom:.75rem}
+.community-perks{margin-top:1.5rem;display:flex;flex-direction:column;gap:.6rem}
+.perk{display:flex;gap:.75rem;align-items:baseline;font-size:14px;color:var(--ink-soft)}
+.perk-dot{width:5px;height:5px;border-radius:50%;background:var(--gold);flex-shrink:0;margin-top:.45rem}
+.community-right{background:var(--surface-2);border:0.5px solid var(--rule);padding:2rem}
+.community-form-title{font-family:var(--serif);font-size:1.1rem;font-weight:normal;margin-bottom:.4rem}
+.community-form-sub{font-size:13px;color:var(--ink-muted);margin-bottom:1.25rem;line-height:1.5}
+.form-field{display:flex;flex-direction:column;gap:.35rem;margin-bottom:1rem}
+.form-label{font-size:12px;letter-spacing:0.05em;color:var(--ink-muted)}
+.form-field input{padding:11px 14px;font-size:14px;border:0.5px solid var(--rule);background:var(--surface);color:var(--ink);font-family:var(--sans);outline:none;width:100%}
+.form-field input:focus{border-color:var(--ink)}
+.submit-btn{width:100%;padding:13px;background:var(--ink);color:var(--surface);border:none;font-size:13px;font-family:var(--sans);letter-spacing:0.08em;cursor:pointer;transition:opacity .2s;margin-top:.25rem}
+.submit-btn:hover{opacity:.8}
+.form-note{font-size:11px;color:var(--ink-muted);margin-top:.75rem;text-align:center}
+.form-confirm{display:none;text-align:center;padding:1.5rem 0}
+.form-confirm p{font-family:var(--serif);font-style:italic;color:var(--gold);font-size:15px}
+.form-confirm small{font-size:12px;color:var(--ink-muted);display:block;margin-top:.4rem}
+
+/* ── PRESS STRIP ── */
+.press-strip{border-top:0.5px solid var(--rule);border-bottom:0.5px solid var(--rule);padding:1.25rem 2.5rem;background:var(--surface-2)}
+.press-inner{max-width:var(--max);margin:0 auto;display:flex;align-items:center;gap:3rem;flex-wrap:wrap;justify-content:center}
+.press-label{font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--ink-muted)}
+.press-name{font-family:var(--serif);font-size:14px;font-style:italic;color:var(--ink-muted)}
+
+/* ── FOOTER ── */
+footer{background:var(--ink);padding:3rem 2.5rem 2rem}
+.footer-inner{max-width:var(--max);margin:0 auto}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr;gap:3rem;padding-bottom:2rem;border-bottom:0.5px solid #1e1e1e}
+.footer-brand-block{}
+.footer-brand-name{font-family:var(--serif);font-size:1.3rem;color:#f7f5f2;margin-bottom:.5rem}
+.footer-brand-desc{font-size:13px;color:#555;line-height:1.65;max-width:280px}
+.footer-col-title{font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:#444;margin-bottom:.85rem}
+.footer-col a{display:block;font-size:13px;color:#666;margin-bottom:.4rem;transition:color .2s}
+.footer-col a:hover{color:#f7f5f2}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:1.5rem;font-size:12px;color:#444;flex-wrap:wrap;gap:.5rem}
+
+@media(max-width:860px){
+  .hero-inner,.about-inner,.community-section{grid-template-columns:1fr;gap:2.5rem}
+  .books-grid{grid-template-columns:repeat(2,1fr)}
+  .footer-top{grid-template-columns:1fr 1fr}
+  .hero::before{font-size:8rem}
+  nav .nav-links{display:none}
+}
+@media(max-width:520px){
+  .books-grid{grid-template-columns:repeat(2,1fr);gap:1rem}
+  .footer-top{grid-template-columns:1fr}
+  nav{padding:1rem 1.25rem}
+  .hero,.about-section,.books-section,.community-section{padding-left:1.25rem;padding-right:1.25rem}
+  .footer-bottom{flex-direction:column;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-brand">NEMOMOT</span>
+  <div class="nav-links">
+    <a href="#">Books</a>
+    <a href="#">Authors</a>
+    <a href="#">About</a>
+    <a href="#">Community</a>
+    <button class="nav-cta" onclick="document.querySelector('.community-section').scrollIntoView({behavior:'smooth'})">Join the list</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-left">
+      <span class="hero-eyebrow">NEMOMOT Publishing</span>
+      <h1>Books that change<br>the way you<br><em>think, feel,<br>and live.</em></h1>
+      <p class="hero-desc">NEMOMOT is an independent publishing imprint dedicated to books that sit at the intersection of science, culture, and the human condition. We publish for curious, serious readers who want more than entertainment — they want transformation.</p>
+    </div>
+    <div class="hero-right">
+      <div class="hero-divider"></div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">Sept 2026</div>
+        <div class="hero-stat-label">First title publication</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">4</div>
+        <div class="hero-stat-label">Books in development</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">3,241</div>
+        <div class="hero-stat-label">Early readers on our list</div>
+      </div>
+      <div class="hero-divider"></div>
+    </div>
+  </div>
+</div>
+
+<!-- MANIFESTO -->
+<div class="manifesto">
+  <blockquote>"The world doesn't need more content. It needs more books worth a lifetime."</blockquote>
+  <cite>— NEMOMOT Publishing Manifesto</cite>
+</div>
+
+<hr/>
+
+<!-- BOOKS -->
+<div class="books-section">
+  <div class="books-header">
+    <h2>Our titles</h2>
+    <a href="#">View all →</a>
+  </div>
+  <div class="books-grid">
+
+    <!-- Book 1: Featured -->
+    <div class="book-card featured">
+      <div class="book-cover">
+        <div class="book-cover-bar"></div>
+        <div class="book-cover-top">
+          <span class="book-cover-imprint">NEMOMOT</span>
+        </div>
+        <div class="book-cover-bottom">
+          <div class="book-badge">Available Sept 2026</div>
+          <div class="book-cover-title">Wired Alone</div>
+          <div class="book-cover-author">Dr. Nadia Osei-Mensah</div>
+        </div>
+      </div>
+      <div class="book-meta">
+        <div class="book-title">Wired Alone</div>
+        <div class="book-author-name">Dr. Nadia Osei-Mensah</div>
+        <span class="book-tag">Psychology · Technology</span><br/>
+        <a class="book-cta" href="#">Read Chapter 1 free →</a>
+      </div>
+    </div>
+
+    <!-- Book 2: Coming soon -->
+    <div class="book-card soon">
+      <div class="book-cover">
+        <div class="book-cover-bar" style="background:var(--surface-3)"></div>
+        <div class="book-cover-top">
+          <span class="book-cover-imprint">NEMOMOT</span>
+          <span class="book-cover-eyebrow">Coming 2027</span>
+        </div>
+        <div class="book-cover-bottom">
+          <div class="book-cover-title" style="font-size:14px">Untitled Book 2</div>
+          <div class="book-cover-author">Author TBA</div>
+        </div>
+      </div>
+      <div class="book-meta">
+        <div class="book-title">Untitled — Book II</div>
+        <div class="book-author-name">Author to be announced</div>
+        <span class="book-tag">In Development · 2027</span>
+      </div>
+    </div>
+
+    <!-- Book 3: Coming soon -->
+    <div class="book-card soon">
+      <div class="book-cover">
+        <div class="book-cover-bar" style="background:var(--surface-3)"></div>
+        <div class="book-cover-top">
+          <span class="book-cover-imprint">NEMOMOT</span>
+          <span class="book-cover-eyebrow">Coming 2027</span>
+        </div>
+        <div class="book-cover-bottom">
+          <div class="book-cover-title" style="font-size:14px">Untitled Book 3</div>
+          <div class="book-cover-author">Author TBA</div>
+        </div>
+      </div>
+      <div class="book-meta">
+        <div class="book-title">Untitled — Book III</div>
+        <div class="book-author-name">Author to be announced</div>
+        <span class="book-tag">In Development · 2027</span>
+      </div>
+    </div>
+
+    <!-- Book 4: Placeholder -->
+    <div class="book-card placeholder">
+      <div class="book-cover">
+        <div class="book-cover-inner">
+          <div class="ph-label">Coming Soon</div>
+          <div class="ph-year" style="color:var(--rule);font-family:var(--serif);font-size:1.4rem">2028</div>
+        </div>
+      </div>
+      <div class="book-meta">
+        <div class="book-title" style="color:var(--ink-muted)">Future Title</div>
+        <div class="book-author-name">NEMOMOT · 2028</div>
+        <span class="book-tag">Forthcoming</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<hr/>
+
+<!-- ABOUT / PILLARS -->
+<div class="about-section">
+  <div class="about-inner">
+    <div class="about-left">
+      <h2>An imprint built on ideas that matter</h2>
+      <p>NEMOMOT was founded on the belief that the most important conversations of our time are not happening in conference rooms or on social media. They're happening in books — when a writer with years of research and a real point of view meets a reader willing to be challenged.</p>
+      <p>We are selective by design. Every title we publish is chosen because it has something genuinely new to say — grounded in evidence, written with care, and built to last longer than a news cycle.</p>
+    </div>
+    <div class="about-right">
+      <span class="about-label">What we stand for</span>
+      <div class="pillar">
+        <div class="pillar-num">01</div>
+        <div class="pillar-title">Research over opinion</div>
+        <div class="pillar-desc">Every NEMOMOT title is grounded in data, clinical evidence, or rigorous scholarship — not just a compelling argument.</div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-num">02</div>
+        <div class="pillar-title">Writing that earns its place</div>
+        <div class="pillar-desc">We believe good ideas deserve beautiful prose. We work with writers who care as much about the sentence as the thesis.</div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-num">03</div>
+        <div class="pillar-title">Readers as partners</div>
+        <div class="pillar-desc">Our community isn't an afterthought. Early readers shape how our books reach the world — and how the world responds.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PRESS STRIP -->
+<div class="press-strip">
+  <div class="press-inner">
+    <span class="press-label">As seen in</span>
+    <span class="press-name">The Atlantic</span>
+    <span class="press-name">Psychology Today</span>
+    <span class="press-name">The New York Times</span>
+    <span class="press-name">NPR</span>
+    <span class="press-name">Wired</span>
+    <span class="press-name">Harvard Medical School</span>
+  </div>
+</div>
+
+<!-- COMMUNITY / SIGNUP -->
+<div class="community-section">
+  <div class="community-left">
+    <span class="section-label">Join the NEMOMOT reader community</span>
+    <h2>Be the first to know. The first to read.</h2>
+    <p>NEMOMOT is building something rare: a community of serious readers who want to engage with ideas before they go mainstream. Join the list and you'll get early access to every title we publish — starting with Chapter 1 of <em>Wired Alone</em>, free.</p>
+    <div class="community-perks">
+      <div class="perk"><span class="perk-dot"></span><span>First chapter of every new NEMOMOT title, free</span></div>
+      <div class="perk"><span class="perk-dot"></span><span>Early access to pre-orders before the public</span></div>
+      <div class="perk"><span class="perk-dot"></span><span>Research notes and essays from our authors</span></div>
+      <div class="perk"><span class="perk-dot"></span><span>Invitations to community events and conversations</span></div>
+      <div class="perk"><span class="perk-dot"></span><span>No spam. You can leave any time.</span></div>
+    </div>
+  </div>
+
+  <div class="community-right">
+    <div id="signup-form">
+      <div class="community-form-title">Join the reader list</div>
+      <p class="community-form-sub">3,241 readers already inside. Add your name.</p>
+      <div class="form-field">
+        <label class="form-label">First name</label>
+        <input type="text" id="fname" placeholder="Your first name"/>
+      </div>
+      <div class="form-field">
+        <label class="form-label">Email address</label>
+        <input type="email" id="femail" placeholder="your@email.com"/>
+      </div>
+      <div class="form-field">
+        <label class="form-label">I'm most interested in</label>
+        <input type="text" id="finterest" placeholder="e.g. Psychology, Technology, Culture…"/>
+      </div>
+      <button class="submit-btn" onclick="handleSignup()">Join the community →</button>
+      <p class="form-note">Free to join. No credit card. Unsubscribe anytime.</p>
+    </div>
+    <div class="form-confirm" id="form-confirm">
+      <p>Welcome to NEMOMOT.</p>
+      <small>Check your inbox — Chapter 1 of <em>Wired Alone</em> is waiting for you.</small>
+    </div>
+  </div>
+</div>
+
+<hr/>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand-block">
+        <div class="footer-brand-name">NEMOMOT</div>
+        <p class="footer-brand-desc">An independent publishing imprint dedicated to books at the intersection of science, culture, and the human condition.</p>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Books</div>
+        <a href="#">Wired Alone</a>
+        <a href="#">Upcoming titles</a>
+        <a href="#">Submit a manuscript</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Company</div>
+        <a href="#">About NEMOMOT</a>
+        <a href="#">Authors</a>
+        <a href="#">Press</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 NEMOMOT Publishing. All rights reserved.</span>
+      <span style="color:#333">Privacy · Terms</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+function handleSignup(){
+  const name=document.getElementById('fname').value.trim();
+  const email=document.getElementById('femail').value.trim();
+  if(!name){document.getElementById('fname').style.borderColor='#c0392b';return}
+  if(!email||!email.includes('@')){document.getElementById('femail').style.borderColor='#c0392b';return}
+  document.getElementById('signup-form').style.display='none';
+  document.getElementById('form-confirm').style.display='block';
+}
+</script>
+</body>
+</html>
