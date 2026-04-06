@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>You're Broke — Even If You're Not Stupid | NEMOMOT</title>
+<meta name="description" content="The financial education nobody gave you. 155 pages. 15 chapters. Available now from NEMOMOT."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#0e0e0e;--ink-soft:#3a3a3a;--ink-muted:#6b6560;--ink-faint:#999;
+  --surface:#f7f5f1;--surface-2:#eeeae3;--surface-3:#e5e0d5;--white:#fffdf9;
+  --dark:#0d0c09;--dark-2:#121008;
+  --gold:#b8924a;--gold-light:#d4aa6a;--gold-dim:#7a5f2e;
+  --rule:#ddd8ce;--rule-dark:#1e1c17;
+  --serif:'Cormorant Garamond',Georgia,serif;
+  --body:'Libre Baskerville',Georgia,serif;
+  --sans:'DM Sans',system-ui,sans-serif;
+  --col:720px;--max:1100px;
+}
+html{scroll-behavior:smooth}
+body{background:var(--surface);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+.reveal.in{opacity:1;transform:none}
+.reveal.d1{transition-delay:.1s}.reveal.d2{transition-delay:.2s}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:200;display:flex;justify-content:space-between;align-items:center;padding:.95rem 2.5rem;background:rgba(247,245,241,.97);backdrop-filter:blur(10px);border-bottom:.5px solid var(--rule)}
+.nav-brand{font-family:var(--serif);font-size:1.1rem;letter-spacing:.1em;font-weight:500}
+.nav-brand a:hover{opacity:.7;transition:opacity .2s}
+.nav-links{display:flex;gap:2rem;align-items:center}
+.nav-links a{font-size:12.5px;color:var(--ink-muted);letter-spacing:.05em;transition:color .2s}
+.nav-links a:hover{color:var(--ink)}
+.nav-buy{font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;border:.5px solid var(--ink);padding:7px 18px;background:transparent;color:var(--ink);font-family:var(--sans);cursor:pointer;transition:background .2s,color .2s;text-decoration:none;display:inline-block}
+.nav-buy:hover{background:var(--ink);color:var(--surface)}
+
+/* BOOK HERO */
+.book-hero{display:grid;grid-template-columns:36% 64%;min-height:calc(100vh - 52px);background:var(--dark);overflow:hidden}
+.bh-left{display:flex;flex-direction:column;justify-content:flex-end;padding:4rem 2.5rem 3.5rem;border-right:.5px solid var(--rule-dark);position:relative;overflow:hidden}
+.bh-left-eyebrow{font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:2.5rem;display:block}
+.bh-title{font-family:var(--serif);font-size:clamp(3rem,5.5vw,5.5rem);font-weight:600;line-height:.95;color:#f0ece4;margin-bottom:.6rem;letter-spacing:-.02em}
+.bh-subtitle{font-family:var(--serif);font-size:clamp(1rem,1.8vw,1.4rem);font-style:italic;font-weight:300;color:var(--gold);margin-bottom:1.5rem}
+.bh-rule{width:40px;height:1.5px;background:var(--gold-dim);margin-bottom:1.5rem}
+.bh-author{font-family:var(--serif);font-size:1rem;color:#c8c4bc;margin-bottom:.3rem}
+.bh-tagline{font-family:var(--serif);font-size:.8rem;font-style:italic;color:#555}
+.bh-cities{margin-top:auto;padding-top:3rem;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#252218}
+
+.bh-right{display:flex;flex-direction:column;justify-content:center;padding:4rem 4rem 4rem 3.5rem}
+.bh-badges{display:flex;gap:.45rem;flex-wrap:wrap;margin-bottom:2.25rem}
+.bh-badge{font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;border:.5px solid #272420;padding:4px 12px;color:#484440}
+.bh-badge.hi{border-color:var(--gold-dim);color:var(--gold)}
+.bh-headline{font-family:var(--serif);font-size:clamp(1.8rem,3vw,3rem);font-weight:300;line-height:1.12;color:#f0ece4;margin-bottom:1.2rem;letter-spacing:-.01em}
+.bh-headline em{font-style:italic;color:var(--gold-light);font-weight:400}
+.bh-hook{font-size:15px;color:#5e5a54;line-height:1.82;max-width:480px;margin-bottom:2.25rem}
+.bh-divider{width:100%;height:.5px;background:var(--rule-dark);margin-bottom:2.25rem}
+.bh-stats{display:grid;grid-template-columns:repeat(3,1fr);border:.5px solid var(--rule-dark);margin-bottom:2.5rem}
+.bhs{padding:1.1rem 1.2rem;border-right:.5px solid var(--rule-dark)}
+.bhs:last-child{border-right:none}
+.bhs-n{font-family:var(--serif);font-size:2rem;font-weight:400;color:#f0ece4;line-height:1;margin-bottom:3px}
+.bhs-l{font-size:11px;color:#3a3834;letter-spacing:.02em;line-height:1.4}
+.bh-ctas{display:flex;flex-direction:column;gap:.7rem;max-width:300px}
+.btn-buy{display:flex;align-items:center;justify-content:center;gap:.6rem;width:100%;padding:15px 22px;background:var(--gold);color:#0c0b08;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;font-family:var(--sans);font-weight:500;cursor:pointer;border:none;transition:background .2s,transform .15s;text-decoration:none}
+.btn-buy:hover{background:var(--gold-light);transform:translateY(-1px)}
+.btn-free{font-size:12.5px;color:#3a3834;letter-spacing:.03em;text-align:center;border:none;background:none;font-family:var(--sans);padding:3px 0;transition:color .2s;cursor:pointer;display:block;text-decoration:none}
+.btn-free:hover{color:#c8c2b4}
+.btn-free span{border-bottom:.5px solid #2a2824;padding-bottom:2px}
+.bh-secure{font-size:11px;color:#2a2824;text-align:center;letter-spacing:.03em}
+
+/* QUOTE STRIP */
+.quote-strip{background:var(--surface-2);padding:4.5rem 2.5rem;border-bottom:.5px solid var(--rule)}
+.quote-inner{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:1fr 1px 1fr;gap:4.5rem;align-items:center}
+.qs-divider{background:var(--rule)}
+.main-quote{font-family:var(--serif);font-size:clamp(1.3rem,2.2vw,1.75rem);font-style:italic;font-weight:300;line-height:1.5;color:var(--ink);padding-left:1.5rem;border-left:2px solid var(--gold)}
+.main-quote-attr{font-family:var(--sans);font-size:12px;color:var(--ink-muted);margin-top:.9rem;font-style:normal;letter-spacing:.04em}
+.quote-body p{font-family:var(--body);font-size:14.5px;color:var(--ink-soft);line-height:1.85;margin-bottom:.9rem}
+.quote-body p:last-child{margin-bottom:0}
+
+/* READING SECTION */
+.reading-section{background:var(--white);padding:5rem 2.5rem}
+.reading-inner{max-width:var(--col);margin:0 auto}
+.reading-eyebrow{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);display:block;text-align:center;margin-bottom:.5rem}
+.reading-title{font-family:var(--serif);font-size:clamp(2rem,4vw,3rem);font-weight:400;text-align:center;color:var(--ink);margin-bottom:.4rem}
+.reading-subtitle{font-family:var(--serif);font-size:1.15rem;font-style:italic;font-weight:300;color:var(--ink-muted);text-align:center;margin-bottom:.4rem}
+.reading-meta{font-size:12.5px;color:var(--ink-muted);text-align:center;margin-bottom:2rem}
+.reading-rule{border:none;border-top:.5px solid var(--rule);margin:2rem 0}
+.reading-dedication{font-family:var(--serif);font-size:1.05rem;font-style:italic;font-weight:300;color:var(--ink-muted);text-align:center;line-height:1.65;margin:2.5rem 0}
+.r-blockquote{border-left:2px solid var(--gold);padding:.5rem 1.5rem;margin:1.75rem 0}
+.r-blockquote p{font-family:var(--serif);font-size:1rem;font-style:italic;color:var(--ink-soft);line-height:1.6}
+.r-blockquote cite{font-size:12px;color:var(--ink-muted);font-style:normal;display:block;margin-top:.4rem}
+.chapter-label{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:.5rem;margin-top:3rem}
+.chapter-title{font-family:var(--serif);font-size:clamp(1.5rem,2.8vw,2.1rem);font-weight:400;color:var(--ink);margin-bottom:1.5rem;line-height:1.2}
+.prose{font-family:var(--body);font-size:15.5px;color:var(--ink-soft);line-height:1.9}
+.prose p{margin-bottom:1.2rem}
+.prose p:last-child{margin-bottom:0}
+.prose strong{font-weight:700;color:var(--ink)}
+.stat-box{background:var(--surface-2);border:.5px solid var(--rule);padding:2rem;margin:2rem 0;text-align:center}
+.stat-box-n{font-family:var(--serif);font-size:3.5rem;font-weight:300;color:var(--ink);line-height:1;margin-bottom:.5rem}
+.stat-box-desc{font-size:13px;color:var(--ink-muted);line-height:1.6;max-width:440px;margin:0 auto}
+.reading-fade{height:100px;background:linear-gradient(0deg,var(--white) 0%,transparent 100%);margin-top:-60px;position:relative;z-index:2;pointer-events:none}
+.paywall{text-align:center;padding:2.5rem 1.5rem;border-top:.5px solid var(--rule)}
+.paywall-title{font-family:var(--serif);font-size:1.4rem;font-weight:400;color:var(--ink);margin-bottom:.5rem}
+.paywall-sub{font-size:14.5px;color:var(--ink-muted);margin-bottom:2rem;line-height:1.65}
+.paywall-sub em{font-style:italic;color:var(--ink-soft)}
+
+/* WHAT THIS BOOK TEACHES */
+.teaches-section{background:var(--surface-2);padding:5rem 2.5rem}
+.teaches-inner{max-width:var(--max);margin:0 auto}
+.teaches-header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.75rem;padding-bottom:1.25rem;border-bottom:.5px solid var(--rule)}
+.teaches-header h2{font-family:var(--serif);font-size:clamp(1.5rem,2.5vw,2rem);font-weight:400}
+.teaches-header span{font-size:13px;color:var(--ink-muted)}
+.teaches-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);margin-top:1.5rem}
+.tc{background:var(--white);padding:2rem;position:relative;overflow:hidden}
+.tc::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:transparent;transition:background .3s}
+.tc:hover::before{background:var(--gold)}
+.tc-num{font-family:var(--serif);font-size:3rem;font-weight:300;color:var(--rule);line-height:1;margin-bottom:.9rem}
+.tc-title{font-family:var(--serif);font-size:1.1rem;font-weight:500;color:var(--ink);margin-bottom:.6rem;line-height:1.3}
+.tc-desc{font-size:13.5px;color:var(--ink-muted);line-height:1.65}
+
+/* BUY STRIP */
+.buy-strip{background:var(--dark);padding:5rem 2.5rem}
+.buy-inner{max-width:800px;margin:0 auto;text-align:center}
+.buy-strip h2{font-family:var(--serif);font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:300;color:#f0ece4;margin-bottom:.75rem;line-height:1.2}
+.buy-strip h2 em{font-style:italic;color:var(--gold-light)}
+.buy-strip p{font-size:15px;color:#555;line-height:1.8;margin-bottom:2.5rem;max-width:560px;margin-left:auto;margin-right:auto}
+.buy-divider{width:48px;height:.5px;background:var(--gold-dim);margin:.75rem auto 2.5rem}
+.buy-cta-group{display:flex;flex-direction:column;gap:.75rem;align-items:center}
+.btn-buy-lg{display:inline-flex;align-items:center;gap:.7rem;padding:17px 44px;background:var(--gold);color:#0c0b08;font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-family:var(--sans);font-weight:500;cursor:pointer;border:none;transition:background .2s,transform .15s}
+.btn-buy-lg:hover{background:var(--gold-light);transform:translateY(-1px)}
+.buy-secure{font-size:11.5px;color:#444;letter-spacing:.04em}
+.buy-includes{display:flex;gap:2rem;justify-content:center;flex-wrap:wrap;margin:2.25rem 0;padding:1.75rem 0;border-top:.5px solid var(--rule-dark);border-bottom:.5px solid var(--rule-dark)}
+.bi{font-size:13px;color:#4a4844;display:flex;align-items:center;gap:.5rem}
+.bi::before{content:'◆';font-size:8px;color:var(--gold-dim)}
+
+/* FOOTER */
+footer{background:var(--dark);padding:2.5rem 2.5rem 1.75rem;border-top:.5px solid var(--rule-dark)}
+.foot-inner{max-width:var(--max);margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.foot-brand{font-family:var(--serif);font-size:1rem;color:#f0ece4;letter-spacing:.08em}
+.foot-links{display:flex;gap:1.5rem;flex-wrap:wrap}
+.foot-links a{font-size:12.5px;color:#444;transition:color .2s}
+.foot-links a:hover{color:#f0ece4}
+.foot-copy{font-size:12px;color:#2a2824;width:100%;text-align:center;margin-top:.5rem;padding-top:1.25rem;border-top:.5px solid var(--rule-dark)}
+
+@media(max-width:960px){
+  .book-hero{grid-template-columns:1fr}
+  .bh-left{border-right:none;border-bottom:.5px solid var(--rule-dark);padding:3.5rem 2.5rem 3rem}
+  .bh-right{padding:3.5rem 2.5rem}
+  .quote-inner{grid-template-columns:1fr;gap:2.5rem}
+  .qs-divider{display:none}
+  .teaches-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:640px){
+  nav .nav-links{display:none}
+  .bh-stats{grid-template-columns:repeat(2,1fr)}
+  .bhs:nth-child(2){border-right:none}
+  .bhs:nth-child(3){grid-column:span 2}
+  .teaches-grid{grid-template-columns:1fr}
+  .buy-includes{flex-direction:column;align-items:center;gap:1rem}
+  nav,.reading-section,.teaches-section,.buy-strip,.quote-strip{padding-left:1.25rem;padding-right:1.25rem}
+  .bh-left,.bh-right{padding-left:1.5rem;padding-right:1.5rem}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-brand"><a href="index.html">NEMOMOT</a></span>
+  <div class="nav-links">
+    <a href="index.html">All Books</a>
+    <a href="#read">Read Free</a>
+    <a href="#teaches">Contents</a>
+    <a href="#buy">Buy Now</a>
+  </div>
+  <a href="https://www.paypal.com/ncp/payment/CLLCESYWRG5PN" target="_blank" rel="noopener" class="nav-buy">Buy Now — $18</a>
+</nav>
+
+<!-- BOOK HERO -->
+<div class="book-hero">
+  <div class="bh-left">
+    <span class="bh-left-eyebrow">NEMOMOT EDITORIAL</span>
+    <h1 class="bh-title">YOU'RE<br>BROKE</h1>
+    <div class="bh-subtitle">Even If You're Not Stupid</div>
+    <div class="bh-rule"></div>
+    <div class="bh-author">Alejandro Vega Soler</div>
+    <div class="bh-tagline">The Financial Education Nobody Gave You</div>
+    <p class="bh-cities">NEMOMOT &nbsp;·&nbsp; BARCELONA &nbsp;·&nbsp; BOGOTÁ &nbsp;·&nbsp; MEXICO CITY</p>
+  </div>
+  <div class="bh-right">
+    <div class="bh-badges">
+      <span class="bh-badge hi">Now Available</span>
+      <span class="bh-badge">155 Pages</span>
+      <span class="bh-badge">First Edition · 2025</span>
+    </div>
+    <h2 class="bh-headline">The financial education<br><em>nobody gave you.</em></h2>
+    <p class="bh-hook">You followed the rules — studied hard, worked hard, spent less than you earned. And yet, somehow, your financial position barely moves. This is not a character flaw. It is a knowledge gap — and this book closes it.</p>
+    <div class="bh-divider"></div>
+    <div class="bh-stats">
+      <div class="bhs"><div class="bhs-n">80K+</div><div class="bhs-l">People advised across Latin America</div></div>
+      <div class="bhs"><div class="bhs-n">15</div><div class="bhs-l">Chapters of actionable insight</div></div>
+      <div class="bhs"><div class="bhs-n">4</div><div class="bhs-l">Parts: System, Education, Revelation, Exit</div></div>
+    </div>
+    <div class="bh-ctas">
+      <a href="https://www.paypal.com/ncp/payment/CLLCESYWRG5PN" target="_blank" rel="noopener" class="btn-buy">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+        BUY THE BOOK — $18
+      </a>
+      <a href="#read" class="btn-free"><span>↓ Read it here for free</span></a>
+      <p class="bh-secure">Secure checkout via PayPal &nbsp;·&nbsp; Instant digital delivery</p>
+    </div>
+  </div>
+</div>
+
+<!-- QUOTE + CONTEXT -->
+<div class="quote-strip">
+  <div class="quote-inner">
+    <div class="reveal">
+      <div class="main-quote">
+        "You were not born broke forever. You were just born without the map. Now you have it."
+        <div class="main-quote-attr">— Alejandro Vega Soler</div>
+      </div>
+    </div>
+    <div class="qs-divider"></div>
+    <div class="reveal d1 quote-body">
+      <p>We live in the most paradoxical moment in modern economic history: never have there been so many financial tools accessible to ordinary people, and never has the system designed to keep them consuming rather than building been more sophisticated.</p>
+      <p>This book is that map. Written for whoever has had enough of not understanding why, despite the effort, wealth does not grow. For whoever suspects the problem is not a lack of hard work but a lack of correct direction.</p>
+    </div>
+  </div>
+</div>
+
+<!-- READING SECTION — free chapters -->
+<div class="reading-section" id="read">
+  <div class="reading-inner">
+    <span class="reading-eyebrow reveal">Read Free</span>
+    <h2 class="reading-title reveal">You're Broke</h2>
+    <div class="reading-subtitle reveal">Even If You're Not Stupid</div>
+    <p class="reading-meta reveal">Alejandro Vega Soler &nbsp;·&nbsp; nemomot editorial &nbsp;·&nbsp; First Edition 2025</p>
+
+    <hr class="reading-rule"/>
+
+    <p class="reading-dedication reveal"><em>For the millions of people who work hard, live with integrity,<br>and deserve to understand the system they operate within.<br>This book is the class the school system never gave you.</em></p>
+
+    <div class="r-blockquote reveal">
+      <p>"You were not born broke forever. You were just born without the map. Now you have it."</p>
+      <cite>— Alejandro Vega Soler</cite>
+    </div>
+
+    <hr class="reading-rule"/>
+
+    <span class="chapter-label reveal">Foreword</span>
+    <h3 class="chapter-title reveal">Why This Book, Why Now</h3>
+
+    <div class="prose reveal">
+      <p>We live in the most paradoxical moment in modern economic history: never have there been so many financial tools accessible to ordinary people, and never has the system designed to keep them consuming rather than building been more sophisticated.</p>
+      <p>A generation ago, investing required going physically to a brokerage, having the right contacts, understanding complex forms. Today, with a phone and ten minutes, almost anyone can access a diversified investment account. The technology democratized access to the financial system in ways no previous generation had.</p>
+      <p>And yet, savings and investment statistics remain alarming. The proportion of people with financial assets generating any return remains a minority in most countries. Financial stress is rising even as nominal wages grow.</p>
+      <p>The technology was not enough. Something more fundamental was missing: understanding. The map. The education that explains not just how to use the tools, but why to use them, what forces you are fighting when you do, and why the system of immediate rewards conspires against the decisions that build long-term freedom.</p>
+      <p>This book is that map. Written for whoever has had enough of not understanding why, despite the effort, wealth does not grow. For whoever suspects the problem is not a lack of hard work but a lack of correct direction. For whoever is ready to see the system as it truly is and consciously decide how to relate to it.</p>
+      <p><strong>Financial freedom is not a luxury of the wealthy. It is the inevitable result of correct decisions, made consistently, for long enough. This book gives you the decisions. The time and consistency are yours.</strong></p>
+    </div>
+
+    <hr class="reading-rule"/>
+
+    <span class="chapter-label reveal">Introduction</span>
+    <h3 class="chapter-title reveal">The Problem Isn't You</h3>
+
+    <div class="r-blockquote reveal">
+      <p>"Financial ignorance is not a moral failing. It is the predictable result of an education designed to produce employees, not owners."</p>
+      <cite>— Robert Kiyosaki</cite>
+    </div>
+
+    <div class="prose reveal">
+      <p>There is a lie you have been told since childhood. Not necessarily with bad intentions. But with real consequences that you have been paying for every month, probably without realizing it. The lie is simple: that if you work hard, spend less than you earn, and save a little each month, you will build financial stability. It is not that this advice is wrong. It is that it is radically incomplete.</p>
+      <p>What they didn't tell you is that you are operating inside a system that was designed — with precision, with research, with billions of dollars of investment — to work against those exact behaviors. A credit system that profits from your debt. An attention economy that sells your focus to the highest bidder. An advertising system that invests trillions of dollars a year making sure you desire exactly what benefits them to sell, not what benefits you.</p>
+      <p>This book will not tell you that you are a victim. Nor that you are guilty. It will tell you something more useful and more uncomfortable: that the system you operate within was designed by others, with objectives different from yours, and that understanding it is the only first step that matters.</p>
+    </div>
+
+    <div class="stat-box reveal">
+      <div class="stat-box-n">73%</div>
+      <div class="stat-box-desc">of workshop participants across 6 countries — when asked how much they have invested today generating a return — answer: nothing. Not because they are stupid. Because no one gave them the map.</div>
+    </div>
+
+    <div class="prose reveal">
+      <p>There is a mechanism that operates in your financial life every day, silently, without anyone having explained it to you. I call it <strong>The Silent Transfer</strong>. It works like this: every time you make a financial decision without fully understanding its consequences, a small transfer occurs…</p>
+    </div>
+
+  </div>
+  <div class="reading-fade"></div>
+  <div class="paywall">
+    <div class="paywall-title">Continue reading inside the book</div>
+    <p class="paywall-sub">The foreword and introduction are yours — free. The complete map — all 15 chapters, the 90-Day Action Plan, the practical exercises — <em>is inside.</em></p>
+    <a href="https://www.paypal.com/ncp/payment/CLLCESYWRG5PN" target="_blank" rel="noopener" class="btn-buy" style="display:inline-flex;width:auto;padding:15px 36px">Get the full book — $18</a>
+  </div>
+</div>
+
+<!-- WHAT THIS BOOK TEACHES -->
+<div class="teaches-section" id="teaches">
+  <div class="teaches-inner">
+    <div class="teaches-header reveal">
+      <h2>What this book teaches</h2>
+      <span>15 chapters · 4 parts</span>
+    </div>
+    <div class="teaches-grid">
+      <div class="tc reveal"><div class="tc-num">01</div><div class="tc-title">The Silent Transfer</div><div class="tc-desc">How the system quietly moves money from your pocket to others' — every time you make an uninformed financial decision.</div></div>
+      <div class="tc reveal d1"><div class="tc-num">02</div><div class="tc-title">The Attention Economy</div><div class="tc-desc">How platforms monetize your time without paying you — and why constant distraction makes good financial decisions nearly impossible.</div></div>
+      <div class="tc reveal d2"><div class="tc-num">03</div><div class="tc-title">Assets vs. Liabilities</div><div class="tc-desc">The single distinction that separates people who build wealth from those who don't. Most of what culture calls "investment" is actually a liability.</div></div>
+      <div class="tc reveal"><div class="tc-num">04</div><div class="tc-title">The Education Gap</div><div class="tc-desc">Why school taught you to work but not to earn — and the specific concepts they deliberately left out that cost you every month.</div></div>
+      <div class="tc reveal d1"><div class="tc-num">05</div><div class="tc-title">Your First Real Asset</div><div class="tc-desc">Four concrete routes to building your first income-generating asset — from wherever you are, with whatever you have, starting this week.</div></div>
+      <div class="tc reveal d2"><div class="tc-num">06</div><div class="tc-title">The 90-Day Plan</div><div class="tc-desc">A step-by-step action plan: Diagnosis, Foundation, and Construction phases to transform your relationship with money in three months.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- BUY -->
+<div class="buy-strip" id="buy">
+  <div class="buy-inner">
+    <h2 class="reveal">No motivation. No shortcuts.<br><em>No false promises.</em></h2>
+    <div class="buy-divider reveal"></div>
+    <p class="reveal">Just the financial education nobody gave you — until now. 155 pages of evidence-grounded, clearly written, immediately actionable material.</p>
+    <div class="buy-includes reveal">
+      <span class="bi">Full 155-page PDF</span>
+      <span class="bi">15 chapters, 4 parts</span>
+      <span class="bi">90-Day Action Plan</span>
+      <span class="bi">Practical exercises</span>
+      <span class="bi">Instant digital delivery</span>
+    </div>
+    <div class="buy-cta-group reveal">
+      <a href="https://www.paypal.com/ncp/payment/CLLCESYWRG5PN" target="_blank" rel="noopener">
+        <button class="btn-buy-lg">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+          BUY THE BOOK — $18
+        </button>
+      </a>
+      <p class="buy-secure">🔒 Secure checkout via PayPal · Instant digital delivery after payment</p>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="foot-inner">
+    <span class="foot-brand">NEMOMOT</span>
+    <div class="foot-links">
+      <a href="index.html">All Books</a>
+      <a href="#read">Read Free</a>
+      <a href="https://www.paypal.com/ncp/payment/CLLCESYWRG5PN" target="_blank" rel="noopener">Buy Now</a>
+      <a href="index.html#community">Community</a>
+      <a href="index.html#about">About</a>
+    </div>
+    <p class="foot-copy">© 2025 NEMOMOT Publishing / Alejandro Vega Soler. All rights reserved. &nbsp;·&nbsp; Privacy · Terms</p>
+  </div>
+</footer>
+
+<script>
+const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target)}})},{threshold:.07,rootMargin:'0px 0px -20px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
