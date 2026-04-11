@@ -62,7 +62,7 @@ function getCartItems() {
 function loadPayPalSDK(callback) {
   if (window.paypal) { callback(); return; }
   const script = document.createElement('script');
-  script.src = `https://www.paypal.com/sdk/js?client-id=${PAYPAL_CONFIG.clientId}&currency=${PAYPAL_CONFIG.currency}`;
+  script.src = `https://www.paypal.com/sdk/js?client-id=${PAYPAL_CONFIG.clientId}&currency=${PAYPAL_CONFIG.currency}&enable-funding=card,venmo&disable-funding=credit`;
   script.onload = callback;
   document.head.appendChild(script);
 }
@@ -76,6 +76,7 @@ function renderPayPalButton() {
 
   loadPayPalSDK(() => {
     window.paypal.Buttons({
+      fundingSource: window.paypal.FUNDING.PAYPAL,
       style: {
         layout: 'horizontal',
         color: 'gold',
@@ -132,6 +133,38 @@ function renderPayPalButton() {
         alert('Something went wrong with PayPal. Please try again.');
       }
     }).render('#paypal-button-container');
+
+    // Card button
+    if (window.paypal.FUNDING && window.paypal.FUNDING.CARD) {
+      window.paypal.Buttons({
+        fundingSource: window.paypal.FUNDING.CARD,
+        createOrder: function(data, actions) {
+          const items = getCartItems();
+          return actions.order.create({
+            purchase_units: [{
+              amount: {
+                value: getCartTotal().toFixed(2),
+                currency_code: PAYPAL_CONFIG.currency,
+                breakdown: { item_total: { currency_code: PAYPAL_CONFIG.currency, value: getCartTotal().toFixed(2) } }
+              },
+              items: items.map(p => ({
+                name: p.title, quantity: '1',
+                unit_amount: { currency_code: PAYPAL_CONFIG.currency, value: p.price.toFixed(2) },
+                category: 'DIGITAL_GOODS',
+              })),
+            }],
+            application_context: { shipping_preference: 'NO_SHIPPING' }
+          });
+        },
+        onApprove: function(data, actions) {
+          return actions.order.capture().then(function() {
+            cart = []; saveCart();
+            window.location.href = PAYPAL_CONFIG.returnUrl;
+          });
+        },
+        onError: function(err) { console.error('Card error:', err); }
+      }).render('#paypal-button-container');
+    }
   });
 }
 
