@@ -428,4 +428,32 @@ footer{background:var(--dark);padding:2.5rem 2.5rem 1.5rem}
 </footer>
 
 <script>
-function doSig
+function doSignup() {
+  var name  = document.getElementById('fn').value.trim();
+  var email = document.getElementById('fe').value.trim();
+  var interest = document.getElementById('fi2').value.trim();
+
+  // Clear previous errors
+  document.getElementById('fn').classList.remove('err');
+  document.getElementById('fe').classList.remove('err');
+
+  var valid = true;
+  if (!name)  { document.getElementById('fn').classList.add('err'); valid = false; }
+  if (!email || !email.includes('@')) { document.getElementById('fe').classList.add('err'); valid = false; }
+  if (!valid) return;
+
+  // Send data via mailto as fallback (replace with your email platform webhook when ready)
+  var subject = encodeURIComponent('New NEMOMOT reader: ' + name);
+  var body    = encodeURIComponent('Name: ' + name + '\nEmail: ' + email + '\nInterested in: ' + (interest || '—'));
+  window.location.href = 'mailto:hello@nemomot.com?subject=' + subject + '&body=' + body;
+
+  // Show confirmation
+  document.getElementById('sf').style.display = 'none';
+  document.getElementById('fc').style.display  = 'block';
+}
+
+function openMobileNav()  { document.getElementById('mobileNav').classList.add('open'); }
+function closeMobileNav() { document.getElementById('mobileNav').classList.remove('open'); }
+</script>
+</body>
+</html>
