@@ -431,9 +431,7 @@ footer{background:var(--dark);padding:2.5rem 2.5rem 1.5rem}
 function doSignup() {
   var name  = document.getElementById('fn').value.trim();
   var email = document.getElementById('fe').value.trim();
-  var interest = document.getElementById('fi2').value.trim();
 
-  // Clear previous errors
   document.getElementById('fn').classList.remove('err');
   document.getElementById('fe').classList.remove('err');
 
@@ -442,14 +440,26 @@ function doSignup() {
   if (!email || !email.includes('@')) { document.getElementById('fe').classList.add('err'); valid = false; }
   if (!valid) return;
 
-  // Send data via mailto as fallback (replace with your email platform webhook when ready)
-  var subject = encodeURIComponent('New NEMOMOT reader: ' + name);
-  var body    = encodeURIComponent('Name: ' + name + '\nEmail: ' + email + '\nInterested in: ' + (interest || '—'));
-  window.location.href = 'mailto:hello@nemomot.com?subject=' + subject + '&body=' + body;
+  var btn = document.querySelector('.btn-join');
+  btn.textContent = 'Joining...';
+  btn.disabled = true;
 
-  // Show confirmation
-  document.getElementById('sf').style.display = 'none';
-  document.getElementById('fc').style.display  = 'block';
+  var formData = new FormData();
+  formData.append('email', email);
+  formData.append('first_name', name);
+  formData.append('utm_source', 'nemomot-website');
+
+  fetch('https://tabos-newsletter-d1ee55.beehiiv.com/subscribe', {
+    method: 'POST',
+    mode: 'no-cors',
+    body: formData
+  }).then(function() {
+    document.getElementById('sf').style.display = 'none';
+    document.getElementById('fc').style.display  = 'block';
+  }).catch(function() {
+    document.getElementById('sf').style.display = 'none';
+    document.getElementById('fc').style.display  = 'block';
+  });
 }
 
 function openMobileNav()  { document.getElementById('mobileNav').classList.add('open'); }
