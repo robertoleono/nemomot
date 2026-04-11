@@ -9,8 +9,8 @@
 // 3. CANCEL_URL: URL a la que vuelve el cliente si cancela el pago
 const PAYPAL_CONFIG = {
   email: 'tabosas2011@gmail.com',           // ← reemplaza con tu email PayPal
-  returnUrl: 'https://robertoleono.github.io/nemomot/thank-you.html',  // ← URL de tu página de descarga
-  cancelUrl: 'https://robertoleono.github.io/nemomot/',       // ← URL si el cliente cancela
+  returnUrl: 'https://www.nemomot.com/thank-you.html',  // ← URL de tu página de descarga
+  cancelUrl: 'https://www.nemomot.com/',       // ← URL si el cliente cancela
   currency: 'USD',
 };
 
