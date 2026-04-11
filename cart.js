@@ -15,7 +15,7 @@ const CATALOG = {
     id: 'youre-broke',
     title: "You're Broke, Not Stupid",
     author: 'Roberto León',
-    price: 18.00,
+    price: 0.01,
     page: 'youre-broke.html',
   },
 };
