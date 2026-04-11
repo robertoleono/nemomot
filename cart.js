@@ -62,7 +62,7 @@ function getCartItems() {
 function loadPayPalSDK(callback) {
   if (window.paypal) { callback(); return; }
   const script = document.createElement('script');
-  script.src = `https://www.paypal.com/sdk/js?client-id=${PAYPAL_CONFIG.clientId}&currency=${PAYPAL_CONFIG.currency}&enable-funding=card,venmo&disable-funding=credit`;
+  script.src = `https://www.paypal.com/sdk/js?client-id=${PAYPAL_CONFIG.clientId}&currency=${PAYPAL_CONFIG.currency}&enable-funding=card,venmo&disable-funding=credit&components=buttons,hosted-fields`;
   script.onload = callback;
   document.head.appendChild(script);
 }
@@ -164,7 +164,7 @@ function renderPayPalButton() {
           });
         },
         onError: function(err) { console.error('Card error:', err); }
-      }).render('#card-button-container');
+      }).render('#paypal-button-container');
     }
   });
 }
@@ -258,7 +258,7 @@ function injectCartDrawer() {
         <span class="cart-total-amount">$0.00</span>
       </div>
       <div id="paypal-button-container" style="margin-bottom:.5rem"></div>
-      <div id="card-button-container" style="margin-bottom:.65rem"></div>
+      <div id="card-form-container"></div>
       <p class="cart-secure">🔒 Secure checkout · Instant digital delivery</p>
     </div>
   `;
@@ -374,6 +374,39 @@ function injectCartStyles() {
     .cart-secure { font-size: 10.5px; color: var(--ink-faint, #999); text-align: center; letter-spacing: .03em; }
     .btn-added-to-cart { background: var(--ink, #0e0e0e) !important; color: var(--surface, #f7f5f1) !important; }
     .btn-added-to-cart:hover { background: var(--ink-soft, #3a3a3a) !important; transform: none !important; }
+
+    /* INLINE CARD FORM */
+    .card-form { margin-top: .5rem; }
+    .card-form-title {
+      font-size: 10px; letter-spacing: .12em; text-transform: uppercase;
+      color: var(--ink-faint, #999); text-align: center; margin-bottom: .75rem;
+    }
+    .card-field-wrap { margin-bottom: .6rem; }
+    .card-field {
+      border: .5px solid var(--rule, #ddd8ce);
+      border-radius: 3px;
+      padding: 11px 12px;
+      font-size: 13px;
+      background: #fff;
+      height: 42px;
+    }
+    .card-row { display: grid; grid-template-columns: 1fr 1fr; gap: .6rem; }
+    .card-pay-btn {
+      width: 100%;
+      padding: 13px;
+      background: #1a1916;
+      color: #f7f5f1;
+      border: none;
+      font-size: 11px;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+      font-family: var(--sans, system-ui);
+      font-weight: 500;
+      cursor: pointer;
+      margin-top: .25rem;
+      transition: background .2s;
+    }
+    .card-pay-btn:hover { background: #2e2c28; }
   `;
   document.head.appendChild(style);
 }
