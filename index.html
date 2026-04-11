@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet"/>
+<script src="cart.js" defer></script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -217,6 +218,10 @@ footer{background:var(--dark);padding:2.5rem 2.5rem 1.5rem}
     <a href="#about">About</a>
     <a href="#community">Community</a>
     <button class="nav-cta" onclick="document.getElementById('community').scrollIntoView({behavior:'smooth'})">Join the list</button>
+    <button class="cart-icon-btn" onclick="openCart()" aria-label="Cart">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+      <span class="cart-badge">0</span>
+    </button>
   </div>
   <button class="nav-mobile-menu" onclick="openMobileNav()" aria-label="Menu">
     <span></span><span></span><span></span>
@@ -263,12 +268,12 @@ footer{background:var(--dark);padding:2.5rem 2.5rem 1.5rem}
       <div class="hstat"><div class="hstat-n">4</div><div class="hstat-l">Parts: System, Education, Revelation, Exit</div></div>
     </div>
     <div class="hero-ctas">
-      <a href="https://www.paypal.com/ncp/payment/CLLCESYWRG5PN" target="_blank" rel="noopener" class="btn-buy-main">
+      <button class="btn-buy-main" onclick="addToCart('youre-broke'); this.textContent='✓ Added to cart'; this.classList.add('btn-added-to-cart')">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
-        BUY THE BOOK — $18
-      </a>
+        ADD TO CART — $18
+      </button>
       <a href="youre-broke.html#read" class="btn-free-read"><span>↓ Read it here for free</span></a>
-      <p class="hero-secure">Secure checkout via PayPal &nbsp;·&nbsp; Digital delivery</p>
+      <p class="hero-secure">Secure checkout via Gumroad &nbsp;·&nbsp; Digital delivery</p>
     </div>
   </div>
 </div>

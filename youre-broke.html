@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet"/>
+<script src="cart.js" defer></script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -174,17 +175,13 @@ footer{background:var(--dark);padding:2.5rem 2.5rem 1.75rem;border-top:.5px soli
     <a href="#teaches">Contents</a>
     <a href="#buy">Buy Now</a>
   </div>
-  <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" style="display:inline">
-    <input type="hidden" name="cmd" value="_xclick"/>
-    <input type="hidden" name="business" value="tabosas2011@gmail.com"/>
-    <input type="hidden" name="item_name" value="You're Broke, Not Stupid"/>
-    <input type="hidden" name="amount" value="18.00"/>
-    <input type="hidden" name="currency_code" value="USD"/>
-    <input type="hidden" name="return" value="https://nemomot.com/thank-you.html"/>
-    <input type="hidden" name="cancel_return" value="https://nemomot.com/youre-broke.html"/>
-    <input type="hidden" name="no_shipping" value="1"/>
-    <button type="submit" class="nav-buy">Buy Now — $18</button>
-  </form>
+  <div style="display:flex;align-items:center;gap:.75rem">
+    <button class="nav-buy" onclick="addToCart('youre-broke'); this.textContent='✓ In cart'; this.style.background='var(--ink)'; this.style.color='var(--surface)'">Add to Cart — $18</button>
+    <button class="cart-icon-btn" onclick="openCart()" aria-label="Cart" style="border-color:var(--rule)">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+      <span class="cart-badge">0</span>
+    </button>
+  </div>
 </nav>
 
 <!-- BOOK HERO -->
@@ -213,22 +210,12 @@ footer{background:var(--dark);padding:2.5rem 2.5rem 1.75rem;border-top:.5px soli
       <div class="bhs"><div class="bhs-n">4</div><div class="bhs-l">Parts: System, Education, Revelation, Exit</div></div>
     </div>
     <div class="bh-ctas">
-      <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
-        <input type="hidden" name="cmd" value="_xclick"/>
-        <input type="hidden" name="business" value="tabosas2011@gmail.com"/>
-        <input type="hidden" name="item_name" value="You're Broke, Not Stupid"/>
-        <input type="hidden" name="amount" value="18.00"/>
-        <input type="hidden" name="currency_code" value="USD"/>
-        <input type="hidden" name="return" value="https://nemomot.com/thank-you.html"/>
-        <input type="hidden" name="cancel_return" value="https://nemomot.com/youre-broke.html"/>
-        <input type="hidden" name="no_shipping" value="1"/>
-        <button type="submit" class="btn-buy">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
-          BUY THE BOOK — $18
-        </button>
-      </form>
+      <button class="btn-buy" onclick="addToCart('youre-broke'); this.innerHTML='<svg width=13 height=13 viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'currentColor\' stroke-width=\'2\'><path d=\'M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z\'/><line x1=\'3\' y1=\'6\' x2=\'21\' y2=\'6\'/><path d=\'M16 10a4 4 0 01-8 0\'/></svg> ✓ Added to cart'; this.classList.add('btn-added-to-cart')">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+        ADD TO CART — $18
+      </button>
       <a href="#read" class="btn-free"><span>↓ Read it here for free</span></a>
-      <p class="bh-secure">Secure checkout via PayPal &nbsp;·&nbsp; Instant digital delivery</p>
+      <p class="bh-secure">Secure checkout via Gumroad &nbsp;·&nbsp; Instant digital delivery</p>
     </div>
   </div>
 </div>
@@ -311,17 +298,7 @@ footer{background:var(--dark);padding:2.5rem 2.5rem 1.75rem;border-top:.5px soli
   <div class="paywall">
     <div class="paywall-title">Continue reading inside the book</div>
     <p class="paywall-sub">The foreword and introduction are yours — free. The complete map — all 15 chapters, the 90-Day Action Plan, the practical exercises — <em>is inside.</em></p>
-    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" style="display:inline">
-      <input type="hidden" name="cmd" value="_xclick"/>
-      <input type="hidden" name="business" value="tabosas2011@gmail.com"/>
-      <input type="hidden" name="item_name" value="You're Broke, Not Stupid"/>
-      <input type="hidden" name="amount" value="18.00"/>
-      <input type="hidden" name="currency_code" value="USD"/>
-      <input type="hidden" name="return" value="https://nemomot.com/thank-you.html"/>
-      <input type="hidden" name="cancel_return" value="https://nemomot.com/youre-broke.html"/>
-      <input type="hidden" name="no_shipping" value="1"/>
-      <button type="submit" class="btn-buy" style="display:inline-flex;width:auto;padding:15px 36px">Get the full book — $18</button>
-    </form>
+      <button class="btn-buy" style="display:inline-flex;width:auto;padding:15px 36px" onclick="addToCart('youre-broke'); this.textContent='✓ Added to cart'; this.classList.add('btn-added-to-cart'); setTimeout(openCart, 400)">Get the full book — $18</button>
   </div>
 </div>
 
@@ -357,21 +334,11 @@ footer{background:var(--dark);padding:2.5rem 2.5rem 1.75rem;border-top:.5px soli
       <span class="bi">Instant digital delivery</span>
     </div>
     <div class="buy-cta-group reveal">
-      <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
-        <input type="hidden" name="cmd" value="_xclick"/>
-        <input type="hidden" name="business" value="tabosas2011@gmail.com"/>
-        <input type="hidden" name="item_name" value="You're Broke, Not Stupid"/>
-        <input type="hidden" name="amount" value="18.00"/>
-        <input type="hidden" name="currency_code" value="USD"/>
-        <input type="hidden" name="return" value="https://nemomot.com/thank-you.html"/>
-        <input type="hidden" name="cancel_return" value="https://nemomot.com/youre-broke.html"/>
-        <input type="hidden" name="no_shipping" value="1"/>
-        <button type="submit" class="btn-buy-lg">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
-          BUY THE BOOK — $18
-        </button>
-      </form>
-      <p class="buy-secure">🔒 Secure checkout via PayPal · Instant digital delivery after payment</p>
+      <button class="btn-buy-lg" onclick="addToCart('youre-broke'); this.innerHTML='✓ Added — <a href=&quot;javascript:openCart()&quot; style=&quot;color:inherit;text-decoration:underline&quot;>View cart</a>'; this.classList.add('btn-added-to-cart')">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+        ADD TO CART — $18
+      </button>
+      <p class="buy-secure">🔒 Secure checkout via Gumroad · Instant digital delivery after payment</p>
     </div>
   </div>
 </div>
