@@ -9,6 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet"/>
 <script src="cart.js" defer></script>
+<script async src="https://subscribe-forms.beehiiv.com/embed.js"></script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -387,7 +388,6 @@ footer{background:var(--dark);padding:2.5rem 2.5rem 1.5rem}
       <p class="sc-sub">Free. Takes 30 seconds. Worth it.</p>
       <div class="fg"><label class="fl" for="fn">First name</label><input class="fi" type="text" id="fn" placeholder="Your first name"/></div>
       <div class="fg"><label class="fl" for="fe">Email address</label><input class="fi" type="email" id="fe" placeholder="your@email.com"/></div>
-      <div class="fg"><label class="fl" for="fi2">I'm most interested in</label><input class="fi" type="text" id="fi2" placeholder="e.g. Psychology, Technology, Finance…"/></div>
       <button class="btn-join" onclick="doSignup()">Join the community →</button>
       <p class="form-note">Free to join. No credit card. Unsubscribe anytime.</p>
     </div>
@@ -444,26 +444,42 @@ function doSignup() {
   btn.textContent = 'Joining...';
   btn.disabled = true;
 
-  var formData = new FormData();
-  formData.append('email', email);
-  formData.append('first_name', name);
-  formData.append('utm_source', 'nemomot-website');
+  // Submit to Beehiiv via a hidden form (works cross-origin, no CORS issues)
+  var form = document.createElement('form');
+  form.method = 'POST';
+  form.action = 'https://subscribe-forms.beehiiv.com/ab42a60b-afa6-4dbc-9716-0873501b9216';
+  form.target = 'beehiiv-target';
+  form.style.display = 'none';
 
-  fetch('https://tabos-newsletter-d1ee55.beehiiv.com/subscribe', {
-    method: 'POST',
-    mode: 'no-cors',
-    body: formData
-  }).then(function() {
+  var emailField = document.createElement('input');
+  emailField.name = 'email';
+  emailField.value = email;
+  form.appendChild(emailField);
+
+  var nameField = document.createElement('input');
+  nameField.name = 'first_name';
+  nameField.value = name;
+  form.appendChild(nameField);
+
+  var utmField = document.createElement('input');
+  utmField.name = 'utm_source';
+  utmField.value = 'nemomot-website';
+  form.appendChild(utmField);
+
+  document.body.appendChild(form);
+  form.submit();
+  document.body.removeChild(form);
+
+  // Show confirmation
+  setTimeout(function() {
     document.getElementById('sf').style.display = 'none';
     document.getElementById('fc').style.display  = 'block';
-  }).catch(function() {
-    document.getElementById('sf').style.display = 'none';
-    document.getElementById('fc').style.display  = 'block';
-  });
+  }, 800);
 }
 
 function openMobileNav()  { document.getElementById('mobileNav').classList.add('open'); }
 function closeMobileNav() { document.getElementById('mobileNav').classList.remove('open'); }
 </script>
+<iframe name="beehiiv-target" id="beehiiv-iframe" src="https://subscribe-forms.beehiiv.com/ab42a60b-afa6-4dbc-9716-0873501b9216" style="position:absolute;width:1px;height:1px;opacity:0;pointer-events:none;border:none;" frameborder="0" scrolling="no"></iframe>
 </body>
 </html>
