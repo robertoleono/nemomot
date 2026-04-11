@@ -4,7 +4,7 @@
 // ============================================================
 
 const PAYPAL_CONFIG = {
-  clientId: 'AV5TfkDkk_NV-VL6LUcCdWXwrhqLcHJGP6LUfSakUuQB0fthwW5hOab67cxMBNU2Xm9XGVi6JonpMBwQ', // PayPal sandbox - replace with live client ID
+  clientId: 'AVnOkJPqfxePfTFyTwW_hwAZCJ_cMJn9w7p5FHAjMkPsxwD6MhofrDoiWL6YMhP92OM2qUpmq_g3taq7', // PayPal sandbox - replace with live client ID
   returnUrl: 'https://www.nemomot.com/thank-you.html',
   cancelUrl: 'https://www.nemomot.com/',
   currency: 'USD',
