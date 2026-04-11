@@ -138,6 +138,7 @@ function renderPayPalButton() {
     if (window.paypal.FUNDING && window.paypal.FUNDING.CARD) {
       window.paypal.Buttons({
         fundingSource: window.paypal.FUNDING.CARD,
+        style: { layout: 'vertical' },
         createOrder: function(data, actions) {
           const items = getCartItems();
           return actions.order.create({
@@ -163,7 +164,7 @@ function renderPayPalButton() {
           });
         },
         onError: function(err) { console.error('Card error:', err); }
-      }).render('#paypal-button-container');
+      }).render('#card-button-container');
     }
   });
 }
@@ -256,7 +257,8 @@ function injectCartDrawer() {
         <span class="cart-total-label">Total</span>
         <span class="cart-total-amount">$0.00</span>
       </div>
-      <div id="paypal-button-container" style="margin-bottom:.65rem"></div>
+      <div id="paypal-button-container" style="margin-bottom:.5rem"></div>
+      <div id="card-button-container" style="margin-bottom:.65rem"></div>
       <p class="cart-secure">🔒 Secure checkout · Instant digital delivery</p>
     </div>
   `;
