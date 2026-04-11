@@ -24,9 +24,7 @@ html{scroll-behavior:smooth}
 body{background:var(--surface);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 a{color:inherit;text-decoration:none}
 hr{border:none;border-top:.5px solid var(--rule);max-width:var(--max);margin:0 auto}
-.reveal{opacity:0;transform:translateY(22px);transition:opacity .65s ease,transform .65s ease}
-.reveal.in{opacity:1;transform:none}
-.reveal.d1{transition-delay:.1s}.reveal.d2{transition-delay:.2s}.reveal.d3{transition-delay:.3s}
+.reveal{opacity:1;transform:none}
 
 /* NAV */
 nav{position:sticky;top:0;z-index:200;display:flex;justify-content:space-between;align-items:center;padding:1rem 2.5rem;background:rgba(247,245,241,.97);backdrop-filter:blur(12px);border-bottom:.5px solid var(--rule)}
@@ -230,7 +228,7 @@ footer{background:var(--dark);padding:2.5rem 2.5rem 1.5rem}
     <span class="hero-eyebrow">NEMOMOT Publishing</span>
     <h1 class="hero-h1">Books that change<br>the way you<br><em>think, feel,<br>and live.</em></h1>
     <p class="hero-desc">NEMOMOT is an independent publishing imprint for people who want to understand how the world actually works — and build a life that is free, healthy, and worth living. No noise. No false promises. Just the clearest ideas we know, written to last.</p>
-    <p class="hero-cities">NEMOMOT &nbsp;·&nbsp; BOGOTÁ &nbsp;·&nbsp; MEXICO CITY</p>
+    <p class="hero-cities">NEMOMOT &nbsp;·&nbsp; Independent &nbsp;·&nbsp; Global</p>
   </div>
 
   <div class="hero-book-panel">
@@ -338,7 +336,7 @@ footer{background:var(--dark);padding:2.5rem 2.5rem 1.5rem}
   <div class="about-inner">
     <div class="about-left reveal">
       <span style="font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:1rem">About NEMOMOT</span>
-      <h2>Built from Bogotá.<br>For everyone who wants to live well.</h2>
+      <h2>An independent imprint.<br>For everyone who wants to live well.</h2>
       <p>NEMOMOT was founded by Roberto León — an entrepreneur who learned most of what matters the hard way. Not in a classroom. Not in a conference room. In the real friction of building things, losing things, and figuring out what the system never bothered to explain.</p>
       <p>The imprint exists because the books Roberto needed at critical moments in his life didn't exist in the right form — clear enough to act on, honest enough to trust, beautiful enough to want to finish. So he built the publishing house he would have wanted as a reader.</p>
       <p>NEMOMOT is for people who work hard, think seriously, and want a life that is free, sane, and worth living. We publish straight — no false promises, no academic fog, no motivational noise. Just the clearest version of the most important ideas we know.</p>
@@ -401,7 +399,7 @@ footer{background:var(--dark);padding:2.5rem 2.5rem 1.5rem}
       <div>
         <div class="fb-name">NEMOMOT</div>
         <p class="fb-desc">Books for people who want to understand how the world works — and build a life that is free, sane, and worth living.</p>
-        <p style="font-size:12px;color:#2a2824;margin-top:.9rem;line-height:1.7">Bogotá · Mexico City<br>hola@nemomot.com</p>
+        <p style="font-size:12px;color:#2a2824;margin-top:.9rem;line-height:1.7">Independent · Global<br>hola@nemomot.com</p>
       </div>
       <div class="fc-col">
         <div class="fct">Books</div>
@@ -425,16 +423,9 @@ footer{background:var(--dark);padding:2.5rem 2.5rem 1.5rem}
 </footer>
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target)}})},{threshold:.07,rootMargin:'0px 0px -25px 0px'});
-document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 function doSignup(){
   const n=document.getElementById('fn'),e=document.getElementById('fe');
   n.classList.remove('err');e.classList.remove('err');
   let ok=true;
   if(!n.value.trim()){n.classList.add('err');ok=false}
-  if(!e.value.trim()||!e.value.includes('@')){e.classList.add('err');ok=false}
-  if(!ok)return;
-  document.getElementById('sf').style.display='none';
-  document.getElementById('fc').style.display='block';
-}
-function openMobileNav(){document.getEleme
+  if(!e.value.trim()||
