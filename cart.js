@@ -1,27 +1,33 @@
 // ============================================================
 // NEMOMOT CART SYSTEM
-// Integrates with Gumroad overlay for payment + auto-delivery
+// Integrates with PayPal for payment + redirects to thank-you.html
 // ============================================================
 
-// CATALOG — add your Gumroad product URLs here as you publish more books
+// ⚠️  CONFIGURACIÓN — reemplaza con tus datos reales:
+// 1. PAYPAL_EMAIL: tu email de cuenta PayPal Business
+// 2. RETURN_URL: URL completa de tu thank-you.html (donde vive tu sitio)
+// 3. CANCEL_URL: URL a la que vuelve el cliente si cancela el pago
+const PAYPAL_CONFIG = {
+  email: 'tabosas2011@gmail.com',           // ← reemplaza con tu email PayPal
+  returnUrl: 'https://robertoleono.github.io/nemomot/thank-you.html',  // ← URL de tu página de descarga
+  cancelUrl: 'https://robertoleono.github.io/nemomot/',       // ← URL si el cliente cancela
+  currency: 'USD',
+};
+
 const CATALOG = {
   'youre-broke': {
     id: 'youre-broke',
     title: "You're Broke, Not Stupid",
     author: 'Roberto León',
     price: 18.00,
-    // Replace with your actual Gumroad product URL after creating it
-    // e.g. https://yourname.gumroad.com/l/youre-broke
-    gumroadUrl: 'https://nemomot.gumroad.com/l/youre-broke',
     page: 'youre-broke.html',
   },
-  // Add future books here:
+  // Agrega futuros libros aquí:
   // 'wired-alone': {
   //   id: 'wired-alone',
   //   title: 'Wired Alone',
   //   author: 'NEMOMOT Editorial',
   //   price: 18.00,
-  //   gumroadUrl: 'https://nemomot.gumroad.com/l/wired-alone',
   //   page: 'wired-alone.html',
   // },
 };
@@ -63,40 +69,57 @@ function getCartItems() {
   return cart.map(i => CATALOG[i.id]).filter(Boolean);
 }
 
-// ─── GUMROAD CHECKOUT ────────────────────────────────────────
-// If cart has 1 item → open Gumroad overlay for that product
-// If cart has 2+ items → open each Gumroad overlay in sequence
-// (Gumroad doesn't support multi-product bundles natively)
+// ─── PAYPAL CHECKOUT ────────────────────────────────────────────
+// Construye un formulario hacia PayPal con los items del carrito.
+// Al completar el pago, PayPal redirige a RETURN_URL (thank-you.html).
 function checkout() {
   const items = getCartItems();
   if (items.length === 0) return;
 
-  // Load Gumroad script if not already loaded
-  if (!window.GumroadOverlay) {
-    const s = document.createElement('script');
-    s.src = 'https://gumroad.com/js/gumroad.js';
-    s.onload = () => triggerGumroad(items);
-    document.head.appendChild(s);
-  } else {
-    triggerGumroad(items);
-  }
-}
+  const form = document.createElement('form');
+  form.method = 'post';
+  form.action = 'https://www.paypal.com/cgi-bin/webscr';
+  form.style.display = 'none';
 
-function triggerGumroad(items) {
-  // Open each product's Gumroad overlay
-  items.forEach((product, i) => {
-    setTimeout(() => {
-      // Create a temporary Gumroad link and click it
-      const a = document.createElement('a');
-      a.href = product.gumroadUrl;
-      a.className = 'gumroad-button';
-      a.setAttribute('data-gumroad-overlay-checkout', 'true');
-      a.style.display = 'none';
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-    }, i * 800); // slight delay between multiple products
+  // Campos base comunes
+  const fields = {
+    business:      PAYPAL_CONFIG.email,
+    currency_code: PAYPAL_CONFIG.currency,
+    return:        PAYPAL_CONFIG.returnUrl,  // ← redirige a thank-you.html tras el pago
+    cancel_return: PAYPAL_CONFIG.cancelUrl,  // ← redirige si el cliente cancela
+    no_shipping:   '1',  // producto digital, no pedir dirección
+    no_note:       '1',
+    rm:            '2',  // POST al regresar (más seguro)
+  };
+
+  if (items.length === 1) {
+    // Pago simple (1 producto)
+    fields.cmd       = '_xclick';
+    fields.item_name = items[0].title;
+    fields.amount    = items[0].price.toFixed(2);
+  } else {
+    // Carrito con múltiples productos
+    fields.cmd    = '_cart';
+    fields.upload = '1';
+    items.forEach((p, i) => {
+      const n = i + 1;
+      fields[`item_name_${n}`] = p.title;
+      fields[`amount_${n}`]    = p.price.toFixed(2);
+      fields[`quantity_${n}`]  = '1';
+    });
+  }
+
+  // Agregar todos los campos al formulario
+  Object.entries(fields).forEach(([name, value]) => {
+    const input = document.createElement('input');
+    input.type  = 'hidden';
+    input.name  = name;
+    input.value = value;
+    form.appendChild(input);
   });
+
+  document.body.appendChild(form);
+  form.submit(); // ← redirige al cliente a PayPal
 }
 
 // ─── CART UI ─────────────────────────────────────────────────
@@ -189,7 +212,7 @@ function injectCartDrawer() {
       </div>
       <button class="cart-checkout-btn" onclick="checkout()" disabled>
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
-        Checkout via Gumroad
+        Checkout via PayPal
       </button>
       <p class="cart-secure">🔒 Secure checkout · Instant digital delivery</p>
     </div>
@@ -418,9 +441,4 @@ document.addEventListener('DOMContentLoaded', () => {
   injectCartDrawer();
   updateCartUI();
 
-  // Load Gumroad script early for faster checkout
-  const s = document.createElement('script');
-  s.src = 'https://gumroad.com/js/gumroad.js';
-  s.async = true;
-  document.head.appendChild(s);
 });
