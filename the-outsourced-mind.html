@@ -368,29 +368,16 @@ function doCapture() {
   btn.textContent = 'Sending...';
   btn.disabled = true;
 
-  // Submit to Beehiiv
-  var form = document.createElement('form');
-  form.method = 'POST';
-  form.action = 'https://subscribe-forms.beehiiv.com/ab42a60b-afa6-4dbc-9716-0873501b9216';
-  form.target = 'beehiiv-target';
-  form.style.display = 'none';
-
-  [['email', email], ['first_name', name], ['utm_source', 'outsourced-mind-landing'], ['utm_medium', 'instagram-reel'], ['utm_campaign', 'fase0-hook-gps']].forEach(function(p) {
-    var f = document.createElement('input');
-    f.name = p[0]; f.value = p[1];
-    form.appendChild(f);
+  var params = new URLSearchParams({
+    email: email,
+    first_name: name,
+    utm_source: 'outsourced-mind-landing',
+    utm_medium: 'instagram-reel',
+    utm_campaign: 'fase0-hook-gps'
   });
 
-  document.body.appendChild(form);
-  form.submit();
-  document.body.removeChild(form);
-
-  setTimeout(function() {
-    document.getElementById('form-block').style.display = 'none';
-    document.getElementById('conf-block').style.display = 'block';
-  }, 800);
+  window.location.href = 'https://tabos-newsletter-d1ee55.beehiiv.com/subscribe?' + params.toString();
 }
 </script>
-<iframe name="beehiiv-target" src="about:blank" style="position:absolute;width:1px;height:1px;opacity:0;pointer-events:none;border:none;" frameborder="0"></iframe>
 </body>
 </html>
