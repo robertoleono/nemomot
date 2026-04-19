@@ -1,4 +1,4 @@
-<\!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
@@ -11,7 +11,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet"/>
-<script async src="https://subscribe-forms.beehiiv.com/embed.js"></script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -159,8 +158,8 @@ footer{border-top:.5px solid var(--rule-dark);padding:2.5rem 3rem;display:flex;j
 <body>
 
 <nav>
-  <a href="/" class="nav-brand">NEMOMOT</a>
-  <a href="/" class="nav-back">← All Books</a>
+  <a href="index.html" class="nav-brand">NEMOMOT</a>
+  <a href="index.html" class="nav-back">← All Books</a>
 </nav>
 
 <section class="hero">
@@ -354,7 +353,7 @@ footer{border-top:.5px solid var(--rule-dark);padding:2.5rem 3rem;display:flex;j
 
 <footer>
   <p class="foot-copy">© 2026 NEMOMOT Publishing · Roberto León. All rights reserved.</p>
-  <a href="/" class="foot-link">nemomot.com</a>
+  <a href="index.html" class="foot-link">nemomot.com</a>
 </footer>
 
 <script>
@@ -362,20 +361,27 @@ function submitToBeehiiv(email, firstName, btnEl, formBlockId, confBlockId) {
   btnEl.textContent = 'Sending...';
   btnEl.disabled = true;
 
-  var params = new URLSearchParams({
-    email: email,
-    first_name: firstName,
-    utm_source: 'outsourced-mind-landing',
-    utm_medium: 'instagram-reel',
-    utm_campaign: 'fase0-hook-gps'
+  var form = document.createElement('form');
+  form.method = 'POST';
+  form.action = 'https://subscribe-forms.beehiiv.com/ab42a60b-afa6-4dbc-9716-0873501b9216';
+  form.target = 'beehiiv-target';
+  form.style.display = 'none';
+
+  [['email', email], ['first_name', firstName], ['utm_source', 'outsourced-mind-landing'], ['utm_medium', 'organic'], ['utm_campaign', 'fase0-hook-gps']].forEach(function(pair) {
+    var input = document.createElement('input');
+    input.name = pair[0];
+    input.value = pair[1];
+    form.appendChild(input);
   });
 
-  window.open('https://tabos-newsletter-d1ee55.beehiiv.com/subscribe?' + params.toString(), '_blank');
+  document.body.appendChild(form);
+  form.submit();
+  document.body.removeChild(form);
 
   setTimeout(function() {
     document.getElementById(formBlockId).style.display = 'none';
     document.getElementById(confBlockId).style.display = 'block';
-  }, 500);
+  }, 800);
 }
 
 function doCapture() {
@@ -402,6 +408,6 @@ function doCaptureBottom() {
   submitToBeehiiv(email, name, document.querySelector('.btn-bc'), 'bc-form-block', 'bc-conf');
 }
 </script>
-
+<iframe name="beehiiv-target" src="about:blank" style="position:absolute;width:1px;height:1px;opacity:0;pointer-events:none;border:none;" frameborder="0"></iframe>
 </body>
 </html>
