@@ -384,9 +384,9 @@ function doCapture() {
   document.getElementById('fn').classList.remove('err');
   document.getElementById('fe').classList.remove('err');
   var valid = true;
-  if (\!name)  { document.getElementById('fn').classList.add('err'); valid = false; }
-  if (\!email || \!email.includes('@')) { document.getElementById('fe').classList.add('err'); valid = false; }
-  if (\!valid) return;
+  if (!name)  { document.getElementById('fn').classList.add('err'); valid = false; }
+  if (!email || !email.includes('@')) { document.getElementById('fe').classList.add('err'); valid = false; }
+  if (!valid) return;
   submitToBeehiiv(email, name, document.querySelector('.btn-get'), 'form-block', 'conf-block');
 }
 
@@ -396,9 +396,9 @@ function doCaptureBottom() {
   document.getElementById('fn2').classList.remove('err');
   document.getElementById('fe2').classList.remove('err');
   var valid = true;
-  if (\!name)  { document.getElementById('fn2').classList.add('err'); valid = false; }
-  if (\!email || \!email.includes('@')) { document.getElementById('fe2').classList.add('err'); valid = false; }
-  if (\!valid) return;
+  if (!name)  { document.getElementById('fn2').classList.add('err'); valid = false; }
+  if (!email || !email.includes('@')) { document.getElementById('fe2').classList.add('err'); valid = false; }
+  if (!valid) return;
   submitToBeehiiv(email, name, document.querySelector('.btn-bc'), 'bc-form-block', 'bc-conf');
 }
 </script>
