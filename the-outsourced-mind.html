@@ -70,7 +70,9 @@ nav{display:flex;justify-content:space-between;align-items:center;padding:1.1rem
 .form-note{font-size:11px;color:#3a3630;margin-top:.9rem;letter-spacing:.02em}
 .conf-block{display:none;text-align:center;padding:2rem 0}
 .conf-block p{font-family:var(--serif);font-size:1.4rem;color:var(--gold-light);margin-bottom:.5rem}
-.conf-block small{font-size:12px;color:#464240}
+.conf-block small{font-size:12px;color:#464240;display:block;margin-bottom:1.25rem}
+.btn-download-ch1{display:inline-block;margin-top:.25rem;padding:14px 28px;background:var(--gold);color:#0c0b08;font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-family:var(--sans);font-weight:500;text-decoration:none;transition:background .2s,transform .15s}
+.btn-download-ch1:hover{background:var(--gold-light);transform:translateY(-1px)}
 
 /* PROOF STRIP */
 .proof-strip{display:grid;grid-template-columns:repeat(3,1fr);border-top:.5px solid var(--rule-dark)}
@@ -203,8 +205,9 @@ footer{border-top:.5px solid var(--rule-dark);padding:2.5rem 3rem;display:flex;j
         <p class="form-note">Free. Unsubscribe anytime. Your email stays with NEMOMOT.</p>
       </div>
       <div class="conf-block" id="conf-block">
-        <p>Check your inbox.</p>
-        <small>Chapter 1 is on its way — look for an email from NEMOMOT.</small>
+        <p>Your chapter is ready.</p>
+        <small>Click below to download it now — save it somewhere you'll actually open it.</small>
+        <a href="https://nemomot.com/TOM_Chapter1Free.pdf" class="btn-download-ch1" download target="_blank" rel="noopener">↓ Download Chapter 1 — Free PDF</a>
       </div>
     </div>
   </div>
@@ -347,7 +350,7 @@ footer{border-top:.5px solid var(--rule-dark);padding:2.5rem 3rem;display:flex;j
       <button class="btn-bc" onclick="doCaptureBottom()">Get Chapter 1 Free →</button>
       <p class="bc-note">No credit card · No spam · Unsubscribe anytime</p>
     </div>
-    <p class="bc-conf" id="bc-conf">Check your inbox — Chapter 1 is on its way.</p>
+    <p class="bc-conf" id="bc-conf">Your chapter is ready. <a href="https://nemomot.com/TOM_Chapter1Free.pdf" style="color:#b8924a;text-decoration:underline;" download target="_blank" rel="noopener">Download it here →</a></p>
   </div>
 </div>
 
